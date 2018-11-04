@@ -4,5 +4,6 @@ hw1/.ipynb_checkpoints/
 hw1/ignore/
 hw1_IVPs_schemes_stepping/.ipynb_checkpoints/
 hw2_BVPs/.ipynb_checkpoints/
+hw3/.ipynb_checkpoints/
 *.pyc
 *.csv
