@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Nov  4 18:56:37 2018
+Created on Mon Nov 05 14:25:58 2018
 
-@author: sspie
-
-this code creates an A matrix that acts as a linear operator on for a 
-gradiant. dx2 + dy2, using Euler method, second order accuracy
+@author: sspielman
 """
 
 from __future__ import division
@@ -17,10 +14,6 @@ N=8 # number of columns
 M=8 # number of rows
 dims = M*N
 
-#start with array of zeros
-A = np.zeros((dims,dims))
-
-
 '''
 NOTE: the way the scipy spdiags command works the diagonals line up 
 with first column. So if the diag has values being replaced, it will
@@ -29,12 +22,6 @@ of the shift is equal to the position value.
 '''
 
 #boundary conditions
-vbc1 = (N-1)*M #top wrap
-dbc1 = np.ones(dims)
-
-vbc2 = -(N-1)*M #bottom wrap
-dbc2 = np.ones(dims)
-
 vbc3 = N-1
 dbc3 = np.ones(dims) 
 for i in range(1,len(dbc3)): #loop through and zero out values
@@ -48,14 +35,6 @@ for i in range(1,len(dbc4)):
         dbc4[i] = 0
 
 #central conditions
-v1 = 0 #center value
-d1 = np.ones(dims)*-4
-
-v2 = -N #value below
-d2 = np.ones(dims)
-
-v3 = N #value above
-d3 = np.ones(dims)
 
 v4 = -1 #value left
 d4 = np.ones(dims)
@@ -69,11 +48,7 @@ for i in range(1,len(d5)):
     if (i)%N == 0:
         d5[i] = 0
 
-data = np.array([d1,d2,d3,d4,d5,dbc1,dbc2,dbc3,dbc4])
-diag = np.array([v1,v2,v3,v4,v5,vbc1,vbc2,vbc3,vbc4])
+data = np.array([d4,d5,dbc3,dbc4])
+diag = np.array([v4,v5,vbc3,vbc4])
 
-A = spdiags(data, diag, dims, dims).toarray()
-
-
-
-np.savetxt("A.csv", A, delimiter=",")
+B = spdiags(data, diag, dims, dims).toarray()
