@@ -124,8 +124,8 @@ Fn = unscramble(mat, keys, ofstW, ofstH, bw, bh, W, H).copy()
 #Fn = Fn[160:240,160:240]
 
 Fnplt = np.log(abs(np.fft.fftshift(Fn))) #create log version to visualize
-Fncenter = Fnplt[160:240,160:240] #get center file for submit
-np.savetxt('A4.dat', Fncenter)
+#Fncenter = Fnplt[160:240,160:240].copy() #get center file for submit
+np.savetxt('A4.dat', Fnplt)
 
 Fnshow = np.fft.ifft2(Fn) #inverse fft the matrix and return to real numbers
 Fnshow = np.uint8(abs(Fnshow)) #convert numbers to 8 bit color values
