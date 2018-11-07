@@ -6,20 +6,26 @@ Created on Mon Nov  5 20:44:15 2018
 """
 
 import numpy as np
+import scipy.io as sio
 
 h =  np.vstack(np.arange(1,8,1))
 for i in range(2,10):
     v = np.vstack(np.arange(i,i+7,1))
     h = np.concatenate((h,v),axis=1)   
     
-keys = np.array([3,2,6,5,4,1])
+#load key
+mat_contents = sio.loadmat('permvec.mat')
+permvec = mat_contents['permvec']
+[Hp, Wp] = permvec.shape
+keys = permvec.astype(int).flatten()
 
-[bw, bh] = [2,2] #block size
-[ofstW, ofstH] = [2,2] #offset from top left
-[W,H] = [3,2] #block grid
+
+[bw, bh] = [1,1] #block size
+[ofstW, ofstH] = [0,0] #offset from top left
+[W,H] = [4,4] #block grid
 grd = np.transpose(np.arange(1,W*H+1,1).reshape(W,H))
 key = np.transpose(keys.reshape(W,H))
-
+h = grd
 
 col = 1
 row = 1
