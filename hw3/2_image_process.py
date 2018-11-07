@@ -22,8 +22,8 @@ Fmat = mat_contents['Fmat']
 F = np.fft.fftshift(Fmat) #shift Fmat so larger values in center
 
 Fplt = np.log(abs(np.fft.fftshift(F))) #create log version to visualize  
+Fplt = Fplt[160:240,160:240]
 plt.imshow(Fplt, cmap=plt.cm.gray); plt.show() #plot log version
-
 
 mat = F
 keys = permvec.astype(int).flatten()
@@ -35,6 +35,7 @@ W = 4
 H = 4
 
 Fn = unscramble(mat, keys, ofstW, ofstH, bw, bh, W, H)
+Fn = Fn[160:240,160:240]
 
 Fplt = np.log(abs(np.fft.fftshift(Fn))) #create log version to visualize  
 plt.imshow(Fplt, cmap=plt.cm.gray); plt.show() #plot log version
