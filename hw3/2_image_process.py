@@ -38,7 +38,9 @@ H = 4
 Fn = unscramble(mat, keys, ofstW, ofstH, bw, bh, W, H).copy()
 #Fn = Fn[160:240,160:240]
 
-Fnplt = np.log(abs(np.fft.fftshift(Fn))) #create log version to visualize  
+Fnplt = np.log(abs(np.fft.fftshift(Fn))) #create log version to visualize
+Fncenter = Fnplt[160:240,160:240] #get center file for submit
+np.savetxt('A4.dat', Fncenter)
 plt.imshow(Fnplt, cmap=plt.cm.gray); plt.show() #plot log version
 
 #check original image
@@ -49,6 +51,7 @@ plt.imshow(F), plt.show() #show original
 #check original image
 Fnshow = np.fft.ifft2(Fn) #inverse fft the matrix and return to real numbers
 Fnshow = np.uint8(abs(Fnshow)) #convert numbers to 8 bit color values
+np.savetxt('A5.dat', Fnshow) #reconstruct image matrix for submittal
 plt.imshow(Fnshow), plt.show() #show original
 
 
